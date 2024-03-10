@@ -11,9 +11,11 @@ CREATE TABLE calendar_events (
   id BIGSERIAL PRIMARY KEY,
   title varchar NOT NULL,
   description text,
-  start_time TIMESTAMP NOT NULL,
-  end_time TIMESTAMP NOT NULL
+  start_time TIMESTAMPTZ NOT NULL,
+  end_time TIMESTAMPTZ NOT NULL
 );
+
+SET TIMEZONE = 'Asia/Kolkata';
 
 CREATE TABLE user_calendar_events (
   id SERIAL PRIMARY KEY,
