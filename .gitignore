@@ -1,5 +1,5 @@
 .env
-node_modules
+**/node_modules
 routes/client/company/document/*
 routes/client/company/shortlist/*
 routes/client/company/waitlist/*

@@ -7,7 +7,6 @@ const cors = require("cors");
 const app = express();
 
 app.use(express.json());
-app.use(cookieParser());
 
 app.use(
     session({
@@ -32,7 +31,7 @@ app.use(
 
 // use this endpoint if you are running only backend but you get an error after you login with you insitute id (please check the url carefully when you get error, url may be of frontend. You will not get an error if you are running the frontend at same time).
 app.get("/", (req, res) => {
-    res.send('<a href= "/api/student/google"> Authenticate with google </a>');
+    res.send("Hello World");
 });
 
 const CalendarRouter = require("./routes/calendar");

@@ -16,6 +16,8 @@ const pool = new Pool({
     },
 });
 
+console.log("DB connected");
+
 let calendar_db = {};
 
 const check_for_null = (input) => {
@@ -30,10 +32,11 @@ const check_for_null = (input) => {
     }
 };
 
-calendar_db.check_by_email = (email) => {
-    const query = `SELECT email,id from details WHERE email= "${email}";`;
-    return execute(query);
-};
+calendar_db.get_user_by_email = async (email) => {
+    let query = `SELECT * FROM users WHERE email = '${email}'`;
+    let result = await execute(query);
+    return result.rows;
+}
 
 
 function execute(query) {
