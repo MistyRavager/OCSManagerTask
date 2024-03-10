@@ -5,22 +5,20 @@ DROP TABLE IF EXISTS user_calendar_events;
 CREATE TABLE users (
   id BIGSERIAL PRIMARY KEY,
   email varchar NOT NULL,
-  primary key (id)
 );
 
 CREATE TABLE calendar_events (
   id BIGSERIAL PRIMARY KEY,
   title varchar NOT NULL,
   description text,
-  start TIMESTAMP NOT NULL,
-  end TIMESTAMP NOT NULL,
+  start_time TIMESTAMP NOT NULL,
+  end_time TIMESTAMP NOT NULL,
 );
 
 CREATE TABLE user_calendar_events (
   id SERIAL PRIMARY KEY,
   user_id int NOT NULL,
   calendar_event_id int NOT NULL,
-  primary key (id),
   foreign key (user_id) references users (id),
   foreign key (calendar_event_id) references calendar_events (id)
 );
