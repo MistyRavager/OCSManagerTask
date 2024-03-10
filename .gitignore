@@ -1,0 +1,7 @@
+.env
+node_modules
+routes/client/company/document/*
+routes/client/company/shortlist/*
+routes/client/company/waitlist/*
+routes/client/company/selected/*
+**/service-account-key-file.json
