@@ -36,6 +36,8 @@ const get_calendar_by_month = async (email, year, month) => {
                     let event = events[i];
                     let start_date = dayjs(event.start_time).tz("Asia/Kolkata");
                     let end_date = dayjs(event.end_time).tz("Asia/Kolkata");
+                    event.start_time = dayjs(event.start_time).tz("Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss");
+                    event.end_time = dayjs(event.end_time).tz("Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss");
                     let start_day = start_date.date();
                     let end_day = end_date.date();
                     for (let j = start_day; j <= end_day; j++) {
@@ -64,6 +66,11 @@ const get_calendar_of_today = async (email) => {
             let end_timestamp = dayjs.tz(dayjs().endOf("day"), "Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss");
             console.log(start_timestamp, end_timestamp);
             let events = await calendar_db.get_events_by_time_range(user_id, start_timestamp, end_timestamp);
+            events = events.map((event) => {
+                event.start_time = dayjs(event.start_time).tz("Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss");
+                event.end_time = dayjs(event.end_time).tz("Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss");
+                return event;
+            });
             return events;
         }
     } catch (error) {
