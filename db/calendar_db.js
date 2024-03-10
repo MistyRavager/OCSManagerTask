@@ -38,7 +38,10 @@ calendar_db.get_user_by_email = async (email) => {
 }
 
 calendar_db.get_events_by_time_range = async (user_id, start_timestamp, end_timestamp) => {
-    let query = `SELECT * FROM calendar_events, user_calendar_events WHERE calendar_events.id = user_calendar_events.calendar_event_id AND user_calendar_events.user_id = '${user_id}' AND calendar_events.start_time >= '${start_timestamp}' AND calendar_events.end_time <= '${end_timestamp}' ORDER BY calendar_events.start_time, calendar_events.end_time;`;
+    // let query = `SELECT * FROM calendar_events, user_calendar_events WHERE calendar_events.id = user_calendar_events.calendar_event_id AND user_calendar_events.user_id = '${user_id}' AND ((calendar_events.start_time >= '${start_timestamp}' AND calendar_events.end_time <= '${end_timestamp}') OR (calendar_events.start_time <= '${start_timestamp}' AND calendar_events.end_time >= '${start_timestamp}') OR (calendar_events.start_time <= '${end_timestamp}' AND calendar_events.end_time >= '${end_timestamp}'))  ORDER BY calendar_events.start_time, calendar_events.end_time;`;
+
+    // convert the 3 cases above to 1 case
+    let query = `SELECT * FROM calendar_events, user_calendar_events WHERE calendar_events.id = user_calendar_events.calendar_event_id AND user_calendar_events.user_id = '${user_id}' AND ((calendar_events.start_time <= '${end_timestamp}' AND calendar_events.end_time >= '${start_timestamp}'))  ORDER BY calendar_events.start_time, calendar_events.end_time;`;
 
     let result = await pool.query(query);
     return result.rows;

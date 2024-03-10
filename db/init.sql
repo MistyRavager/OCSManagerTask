@@ -41,14 +41,14 @@ INSERT INTO users (email) VALUES ('user14@example.com');
 INSERT INTO users (email) VALUES ('user15@example.com');
 INSERT INTO users (email) VALUES ('cs21btech11033@iith.ac.in');
 
-INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('Event A', 'Description for Event 1', '2024-03-10 15:00:00', '2024-03-10 19:00:00');
+INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('Event A', 'Description for Event 1', '2024-03-10 23:00:00', '2024-03-11 09:00:00');
 INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('Event C', 'Description for Event 1', '2024-03-10 11:00:00', '2024-03-10 16:00:00');
 INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('Event AB', 'Description for Event 1', '2024-03-10 08:00:00', '2024-03-10 23:59:59');
 INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('Event 2', 'Description for Event 2', '2024-03-11 00:00:00', '2024-03-11 23:59:59');
 INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('Event A', 'Description for Event 1', '2024-03-11 15:00:00', '2024-03-11 19:00:00');
 INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('Event C', 'Description for Event 1', '2024-03-11 11:00:00', '2024-03-11 16:00:00');
 INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('Event AB', 'Description for Event 1', '2024-03-11 08:00:00', '2024-03-11 10:00:00');
-INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('Event 2', 'Description for Event 2', '2024-03-12 14:30:00', '2024-03-12 23:59:59');
+INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('Event 2', 'Description for Event 2', '2024-03-12 14:30:00', '2024-03-13 03:59:59');
 INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('Event A', 'Description for Event 1', '2024-03-12 15:00:00', '2024-03-12 19:00:00');
 INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('Event C', 'Description for Event 1', '2024-03-12 11:00:00', '2024-03-12 16:00:00');
 INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('Event AB', 'Description for Event 1', '2024-03-12 00:00:00', '2024-03-12 10:00:00');
