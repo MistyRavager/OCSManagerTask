@@ -1,29 +1,29 @@
-DROP TABLE IF EXISTS 'users';
-DROP TABLE IF EXISTS 'calendar_events';
-DROP TABLE IF EXISTS 'user_calendar_events';
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS calendar_events;
+DROP TABLE IF EXISTS user_calendar_events;
 
-CREATE TABLE 'users' (
-  'id' int(11) NOT NULL AUTO_INCREMENT,
-  'email' varchar(255) NOT NULL,
-  primary key ('id')
+CREATE TABLE users (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  email varchar(255) NOT NULL,
+  primary key (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE 'calendar_events' (
-  'id' int(11) NOT NULL AUTO_INCREMENT,
-  'title' varchar(255) NOT NULL,
-  'description' text,
-  'start' datetime NOT NULL,
-  'end' datetime NOT NULL,
-  primary key ('id')
+CREATE TABLE calendar_events (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  title varchar(255) NOT NULL,
+  description text,
+  start datetime NOT NULL,
+  end datetime NOT NULL,
+  primary key (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE 'user_calendar_events' (
-  'id' int(11) NOT NULL AUTO_INCREMENT,
-  'user_id' int(11) NOT NULL,
-  'calendar_event_id' int(11) NOT NULL,
-  primary key ('id'),
-  foreign key ('user_id') references 'users' ('id'),
-  foreign key ('calendar_event_id') references 'calendar_events' ('id')
+CREATE TABLE user_calendar_events (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  user_id int(11) NOT NULL,
+  calendar_event_id int(11) NOT NULL,
+  primary key (id),
+  foreign key (user_id) references users (id),
+  foreign key (calendar_event_id) references calendar_events (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO users (email) VALUES ('user1@example.com');
