@@ -3,24 +3,23 @@ DROP TABLE IF EXISTS calendar_events;
 DROP TABLE IF EXISTS user_calendar_events;
 
 CREATE TABLE users (
-  id int(11) NOT NULL AUTO_INCREMENT,
+  id SERIAL PRIMARY KEY,
   email varchar(255) NOT NULL,
   primary key (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE calendar_events (
-  id int(11) NOT NULL AUTO_INCREMENT,
+  id SERIAL PRIMARY KEY,
   title varchar(255) NOT NULL,
   description text,
   start datetime NOT NULL,
   end datetime NOT NULL,
-  primary key (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE user_calendar_events (
-  id int(11) NOT NULL AUTO_INCREMENT,
-  user_id int(11) NOT NULL,
-  calendar_event_id int(11) NOT NULL,
+  id SERIAL PRIMARY KEY,
+  user_id int NOT NULL,
+  calendar_event_id int NOT NULL,
   primary key (id),
   foreign key (user_id) references users (id),
   foreign key (calendar_event_id) references calendar_events (id)
