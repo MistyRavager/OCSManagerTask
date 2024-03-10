@@ -3,18 +3,18 @@ DROP TABLE IF EXISTS calendar_events;
 DROP TABLE IF EXISTS user_calendar_events;
 
 CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  email varchar(255) NOT NULL,
+  id BIGSERIAL PRIMARY KEY,
+  email varchar NOT NULL,
   primary key (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 CREATE TABLE calendar_events (
-  id SERIAL PRIMARY KEY,
-  title varchar(255) NOT NULL,
+  id BIGSERIAL PRIMARY KEY,
+  title varchar NOT NULL,
   description text,
-  start datetime NOT NULL,
-  end datetime NOT NULL,
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  start TIMESTAMP NOT NULL,
+  end TIMESTAMP NOT NULL,
+);
 
 CREATE TABLE user_calendar_events (
   id SERIAL PRIMARY KEY,
@@ -23,7 +23,7 @@ CREATE TABLE user_calendar_events (
   primary key (id),
   foreign key (user_id) references users (id),
   foreign key (calendar_event_id) references calendar_events (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+);
 
 INSERT INTO users (email) VALUES ('user1@example.com');
 INSERT INTO users (email) VALUES ('user2@example.com');
