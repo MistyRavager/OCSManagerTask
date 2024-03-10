@@ -3,12 +3,11 @@ require("dotenv").config;
 
 // import installed packages (ones installed using npm/yarn)
 const {Pool} = require("pg");
-var SqlString = require("sqlstring");
 
 const pool = new Pool({
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
-    database: process.env.DB_NAME,
+    database: process.env.CALENDAR_DATABASE_NAME,
     password: process.env.DB_PASS,
     port: process.env.DB_PORT,
     ssl: {
@@ -33,34 +32,16 @@ const check_for_null = (input) => {
 };
 
 calendar_db.get_user_by_email = async (email) => {
-    let query = `SELECT * FROM users WHERE email = '${email}'`;
-    let result = await execute(query);
+    let query = `SELECT * FROM users WHERE email = '${email}';`;
+    let result = await pool.query(query);
     return result.rows;
 }
 
-
-function execute(query) {
-    return new Promise((resolve, reject) => {
-        pool.query(query, (err, results) => {
-            if (err) {
-                return reject(err);
-            }
-            return resolve(results);
-        });
-    });
-}
-
-function execute_obj(query, obj) {
-    return new Promise((resolve, reject) => {
-        var sql_s = SqlString.format(query, obj);
-        pool.query(sql_s, (err, results) => {
-            if (err) {
-                return reject(err);
-            } else {
-                return resolve(results);
-            }
-        });
-    });
+calendar_db.get_events_by_time_range = async (user_id, start_timestamp, end_timestamp) => {
+    let query = `SELECT * FROM calendar_events, user_calendar_events WHERE calendar_events.id = user_calendar_events.calendar_event_id AND user_calendar_events.user_id = '${user_id}' AND calendar_events.start_time >= '${start_timestamp}' AND calendar_events.end_time <= '${end_timestamp}' ORDER BY calendar_events.start_time, calendar_events.end_time;`;
+    
+    let result = await pool.query(query);
+    return result.rows;
 }
 
 module.exports = calendar_db;
