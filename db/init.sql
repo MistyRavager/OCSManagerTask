@@ -25,19 +25,19 @@ CREATE TABLE user_calendar_events (
 
 INSERT INTO users (email) VALUES ('user1@example.com');
 INSERT INTO users (email) VALUES ('user2@example.com');
-INSERT INTO users (id, email) VALUES (3, 'user3@example.com');
+INSERT INTO users (email) VALUES ('user3@example.com');
 INSERT INTO users (email) VALUES ('user4@example.com');
 INSERT INTO users (email) VALUES ('user5@example.com');
-INSERT INTO users (id, email) VALUES (6, 'user6@example.com');
+INSERT INTO users (email) VALUES ('user6@example.com');
 INSERT INTO users (email) VALUES ('user7@example.com');
 INSERT INTO users (email) VALUES ('user8@example.com');
-INSERT INTO users (id, email) VALUES (9, 'user9@example.com');
+INSERT INTO users (email) VALUES ('user9@example.com');
 INSERT INTO users (email) VALUES ('user10@example.com');
 INSERT INTO users (email) VALUES ('user11@example.com');
-INSERT INTO users (id, email) VALUES (12, 'user12@example.com');
+INSERT INTO users (email) VALUES ('user12@example.com');
 INSERT INTO users (email) VALUES ('user13@example.com');
 INSERT INTO users (email) VALUES ('user14@example.com');
-INSERT INTO users (id, email) VALUES (15, 'user15@example.com');
+INSERT INTO users (email) VALUES ('user15@example.com');
 INSERT INTO users (email) VALUES ('cs21btech11033@iith.ac.in');
 
 INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('Event 1', 'Description for Event 1', '2024-03-10 08:00:00', '2024-03-10 10:00:00');
