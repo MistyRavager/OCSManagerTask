@@ -76,6 +76,7 @@ INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('
 INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('Board Meeting', 'Corporate strategy discussion', '2024-04-02 09:00:00', '2024-04-02 12:00:00');
 INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('Event 24', 'Description for Event 24', '2024-04-03 17:30:00', '2024-04-03 19:30:00');
 INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('Project Kickoff', 'Initiate new project', '2024-04-04 10:00:00', '2024-04-04 12:00:00');
+INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('Project Kickoff', 'Initiate new project', '2024-03-26 10:00:00', '2024-04-04 12:00:00');
 
 INSERT INTO user_calendar_events (user_id, calendar_event_id) VALUES (16, 1);
 INSERT INTO user_calendar_events (user_id, calendar_event_id) VALUES (16, 2);
@@ -95,7 +96,8 @@ INSERT INTO user_calendar_events (user_id, calendar_event_id) VALUES (16, 20);
 INSERT INTO user_calendar_events (user_id, calendar_event_id) VALUES (16, 22);
 INSERT INTO user_calendar_events (user_id, calendar_event_id) VALUES (16, 23);
 INSERT INTO user_calendar_events (user_id, calendar_event_id) VALUES (16, 24);
-INSERT INTO user_calendar_events (user_id, calendar_event_id) VALUES (16, 25);
+INSERT INTO user_calendar_events (user_id, calendar_event_id) VALUES (16, 35);
+INSERT INTO user_calendar_events (user_id, calendar_event_id) VALUES (16, 36);
 
 INSERT INTO user_calendar_events (user_id, calendar_event_id) VALUES (6, 1);
 INSERT INTO user_calendar_events (user_id, calendar_event_id) VALUES (7, 2);

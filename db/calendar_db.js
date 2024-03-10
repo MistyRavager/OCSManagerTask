@@ -47,4 +47,19 @@ calendar_db.get_events_by_time_range = async (user_id, start_timestamp, end_time
     return result.rows;
 }
 
+calendar_db.add_calendar_event = async (title, description, start_time, end_time) => {
+
+    let query = `INSERT INTO calendar_events (title, description, start_time, end_time) VALUES ('${title}', '${description}', '${start_time}', '${end_time}') RETURNING id;`;
+    let result = await pool.query(query);
+    console.log(result);
+    
+    return result.rows[0].id;
+}
+
+calendar_db.add_user_calendar_event = async (user_id, calendar_event_id) => {
+    let query = `INSERT INTO user_calendar_events (user_id, calendar_event_id) VALUES ('${user_id}', '${calendar_event_id}');`;
+    let result = await pool.query(query);
+    return result;
+}
+
 module.exports = calendar_db;

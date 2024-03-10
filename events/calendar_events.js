@@ -23,10 +23,10 @@ const get_calendar_by_month = async (email, year, month) => {
         } else {
             let user_id = result[0].id;
             if (isNumeric(year) && isNumeric(month)) {
-                let start_timestamp = dayjs.tz(`${year}-${month}-01`, "Asia/Kolkata").startOf("month").format("YYYY-MM-DD HH:mm:ss");
-                let end_timestamp = dayjs.tz(`${year}-${month}-01`, "Asia/Kolkata").endOf("month").format("YYYY-MM-DD HH:mm:ss");
+                let start_timestamp = dayjs.tz(`${year}-${month}-01`, "Asia/Kolkata").startOf("month");
+                let end_timestamp = dayjs.tz(`${year}-${month}-01`, "Asia/Kolkata").endOf("month");
                 
-                let events = await calendar_db.get_events_by_time_range(user_id, start_timestamp, end_timestamp);
+                let events = await calendar_db.get_events_by_time_range(user_id, start_timestamp.format("YYYY-MM-DD HH:mm:ss"), end_timestamp.format("YYYY-MM-DD HH:mm:ss"));
                 
                 let calendar = {};
                 for (let i = 1; i <= dayjs(`${year}-${month}-01`).daysInMonth(); i++) {
@@ -40,6 +40,14 @@ const get_calendar_by_month = async (email, year, month) => {
                     event.end_time = dayjs(event.end_time).tz("Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss");
                     let start_day = start_date.date();
                     let end_day = end_date.date();
+
+                    if (start_date < start_timestamp) {
+                        start_day = 1;
+                    }
+                    if (end_date > end_timestamp) {
+                        end_day = dayjs(`${year}-${month}-01`).daysInMonth();
+                    }
+
                     for (let j = start_day; j <= end_day; j++) {
                         calendar[j].push(event);
                     }
@@ -55,6 +63,34 @@ const get_calendar_by_month = async (email, year, month) => {
     }
 };
 
+const get_calendar_by_date = async (email, year, month, day) => {
+    try {
+        let result = await calendar_db.get_user_by_email(email);
+        if (result.length === 0) {
+            return "No user found with this email";
+        } else {
+            let user_id = result[0].id;
+            if (isNumeric(year) && isNumeric(month) && isNumeric(day)) {
+                let start_timestamp = dayjs.tz(`${year}-${month}-${day}`, "Asia/Kolkata").startOf("day");
+                let end_timestamp = dayjs.tz(`${year}-${month}-${day}`, "Asia/Kolkata").endOf("day");
+                let events = await calendar_db.get_events_by_time_range(user_id, start_timestamp.format("YYYY-MM-DD HH:mm:ss"), end_timestamp.format("YYYY-MM-DD HH:mm:ss"));
+                
+                events = events.map((event) => {
+                    event.start_time = dayjs(event.start_time).tz("Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss");
+                    event.end_time = dayjs(event.end_time).tz("Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss");
+                    return event;
+                });
+                return events;
+            } else {
+                return "Invalid year or month or day";
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+}
+
 const get_calendar_of_today = async (email) => {
     try {
         let result = await calendar_db.get_user_by_email(email);
@@ -64,7 +100,7 @@ const get_calendar_of_today = async (email) => {
             let user_id = result[0].id;
             let start_timestamp = dayjs.tz(dayjs().startOf("day"), "Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss");
             let end_timestamp = dayjs.tz(dayjs().endOf("day"), "Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss");
-            console.log(start_timestamp, end_timestamp);
+            
             let events = await calendar_db.get_events_by_time_range(user_id, start_timestamp, end_timestamp);
             events = events.map((event) => {
                 event.start_time = dayjs(event.start_time).tz("Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss");
@@ -79,7 +115,40 @@ const get_calendar_of_today = async (email) => {
     }
 }
 
+const add_calendar_event = async (email, event) => {
+    try {
+        let result = await calendar_db.get_user_by_email(email);
+        if (result.length === 0) {
+            return "No user found with this email";
+        } else {
+            let start_time = dayjs.tz(event.start_time, "Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss");
+            let end_time = dayjs.tz(event.end_time, "Asia/Kolkata").format("YYYY-MM-DD HH:mm:ss");
+            let title = event.title;
+            let description = event.description;
+
+            let calendar_event_id = await calendar_db.add_calendar_event(title, description, start_time, end_time);
+            console.log(calendar_event_id);
+
+            let user_ids = event.user_ids;
+
+            // can be optimized by using a single query
+            for (let i = 0; i < user_ids.length; i++) {
+                await calendar_db.add_user_calendar_event(user_ids[i], calendar_event_id);
+            }
+        }
+        return "Event added";
+    }
+    catch (error) {
+        console.log(error);
+        return error;
+    }
+}
+
+            
+
 module.exports = {
     get_calendar_by_month,
-    get_calendar_of_today
+    get_calendar_of_today,
+    get_calendar_by_date,
+    add_calendar_event,
 };

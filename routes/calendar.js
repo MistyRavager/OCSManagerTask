@@ -39,4 +39,28 @@ router.get("/get_calendar_today", async (req, res) => {
 }
 );
 
+router.get("/get_calendar_by_date/:year/:month/:day", async (req, res) => {
+    try {
+        let year = req.params.year;
+        let month = req.params.month;
+        let day = req.params.day;
+        let result = await calendar_events.get_calendar_by_date(email, year, month, day);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+);
+
+router.post("/add_calendar_event", async (req, res) => {
+    try {
+        let event = req.body;
+        let result = await calendar_events.add_calendar_event(email, event);
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+}
+);
+
 module.exports = router;
