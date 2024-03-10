@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS calendar_events;
-DROP TABLE IF EXISTS user_calendar_events;
+DROP TABLE IF EXISTS user_calendar_events CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS calendar_events CASCADE;
 
 CREATE TABLE users (
   id BIGSERIAL PRIMARY KEY,
