@@ -14,8 +14,7 @@ router.get("/", async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
-);
+});
 
 router.get("/get_calendar_by_month/:year/:month", async (req, res) => {
     try {
@@ -26,18 +25,16 @@ router.get("/get_calendar_by_month/:year/:month", async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
-);
+});
 
 router.get("/get_calendar_today", async (req, res) => {
     try {
         let result = await calendar_events.get_calendar_of_today(email);
         res.status(200).json(result);
-    } catch (error) {   
+    } catch (error) {
         res.status(500).json(error);
     }
-}
-);
+});
 
 router.get("/get_calendar_by_date/:year/:month/:day", async (req, res) => {
     try {
@@ -49,8 +46,7 @@ router.get("/get_calendar_by_date/:year/:month/:day", async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
-);
+});
 
 router.post("/add_calendar_event", async (req, res) => {
     try {
@@ -60,7 +56,6 @@ router.post("/add_calendar_event", async (req, res) => {
     } catch (error) {
         res.status(500).json(error);
     }
-}
-);
+});
 
 module.exports = router;
